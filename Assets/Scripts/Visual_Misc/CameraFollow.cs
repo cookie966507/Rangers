@@ -2,7 +2,8 @@
 using System.Collections;
 using Assets.Scripts.Data;
 
-public class CameraFollow : MonoBehaviour {
+public class CameraFollow : MonoBehaviour 
+{
 
 	public float speed;
 
@@ -11,23 +12,28 @@ public class CameraFollow : MonoBehaviour {
 	private float greatestDistance;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 		numPlayers = GameManager.instance.AllPlayers.Count;
 	}
 
 	// Update is called once per frame
-	void FixedUpdate () {
+	void FixedUpdate ()
+	{
 		Vector3 averagePosition = Vector3.zero;
-		for(int i = 0; i < numPlayers; i++) {
+		for(int i = 0; i < numPlayers; i++) 
+		{
 			averagePosition += GameManager.instance.AllPlayers[i].transform.position + (Vector3.up*2f);
 		}
 
 		averagePosition /= numPlayers;
 		greatestDistance = 0;
 
-		for(int i = 0; i < numPlayers; i++) {
+		for(int i = 0; i < numPlayers; i++) 
+		{
 			float tempDist = Vector3.Distance(GameManager.instance.AllPlayers[i].transform.position, averagePosition);
-			if(tempDist > greatestDistance) {
+			if(tempDist > greatestDistance) 
+			{
 				greatestDistance = tempDist;
 			}
 		}

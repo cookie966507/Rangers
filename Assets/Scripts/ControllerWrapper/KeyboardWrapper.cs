@@ -2,7 +2,8 @@
 using System.Collections;
 using System;
 
-public class KeyboardWrapper : ControllerInputWrapper {
+public class KeyboardWrapper : ControllerInputWrapper 
+{
 
 	public enum MouseControlMode {None, Drag, Offset};
 
@@ -98,45 +99,17 @@ public class KeyboardWrapper : ControllerInputWrapper {
         }
     }
 
-    public override bool GetButton(Buttons button, bool isDown = false)
+    public override bool GetButton(Buttons button)
     {
-        string buttonName = "";
-        switch (button)
-        {
-            case Buttons.RightBumper:
-                buttonName = getButtonName("RB", "RB", "RB");
-                break;
-            case Buttons.LeftBumper:
-                buttonName = getButtonName("LB", "LB", "LB");
-                break;
-            case Buttons.A:
-                buttonName = getButtonName("A", "A", "A");
-                break;
-			case Buttons.B:
-				buttonName = getButtonName("B", "B", "B");
-				break;
-			case Buttons.X:
-				buttonName = getButtonName("X", "X", "X");
-				break;
-			case Buttons.Y:
-				buttonName = getButtonName("Y", "Y", "Y");
-				break;
-            case Buttons.Start:
-                buttonName = getButtonName("Start", "Start", "Start");
-                break;
-			case Buttons.LeftStickClick:
-				buttonName = getButtonName("LeftStickClick", "LeftStickClick", "LeftStickClick");
-				break;
-			case Buttons.RightStickClick:
-				buttonName = getButtonName("RightStickClick", "RightStickClick", "RightStickClick");
-				break;
-        }
-        if (isDown)
-        {
-            return Input.GetButtonDown(buttonName);
-        }
-        return Input.GetButton(buttonName);
+		string buttonName = GetButtonHelper(button);
+		return Input.GetButton(buttonName);
     }
+
+	public override bool GetButtonDown(Buttons button)
+	{
+		string buttonName = GetButtonHelper(button);
+		return Input.GetButtonDown(buttonName);
+	}
 
     public override bool GetButtonUp(Buttons button)
     {
@@ -159,6 +132,37 @@ public class KeyboardWrapper : ControllerInputWrapper {
 
 	public override string GetButtonHelper (Buttons button)
 	{
-		throw new NotImplementedException ();
+		string buttonName = "";
+		switch (button)
+		{
+		case Buttons.RightBumper:
+			buttonName = getButtonName("RB", "RB", "RB");
+			break;
+		case Buttons.LeftBumper:
+			buttonName = getButtonName("LB", "LB", "LB");
+			break;
+		case Buttons.A:
+			buttonName = getButtonName("A", "A", "A");
+			break;
+		case Buttons.B:
+			buttonName = getButtonName("B", "B", "B");
+			break;
+		case Buttons.X:
+			buttonName = getButtonName("X", "X", "X");
+			break;
+		case Buttons.Y:
+			buttonName = getButtonName("Y", "Y", "Y");
+			break;
+		case Buttons.Start:
+			buttonName = getButtonName("Start", "Start", "Start");
+			break;
+		case Buttons.LeftStickClick:
+			buttonName = getButtonName("LeftStickClick", "LeftStickClick", "LeftStickClick");
+			break;
+		case Buttons.RightStickClick:
+			buttonName = getButtonName("RightStickClick", "RightStickClick", "RightStickClick");
+			break;
+		}
+		return buttonName;
 	}
 }

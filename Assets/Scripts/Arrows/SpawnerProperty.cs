@@ -21,7 +21,7 @@ namespace Assets.Scripts.Arrows
         public override void Init()
         {
             base.Init();
-            // Get the effect base on the type of the type of arrow
+            // Get the effect base on the type of the arrow
             spawnEffect = AttackManager.instance.GetEffect(type);
         }
 
