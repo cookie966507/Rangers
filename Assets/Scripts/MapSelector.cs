@@ -17,13 +17,24 @@ public class MapSelector : MonoBehaviour {
 	}
 
 	public void NextMap() {
-		currentSelectedMap = (currentSelectedMap + 1) % (arenaSelector ? ((int)Enums.BattleStages.NumStages) : ((int)Enums.TargetPracticeStages.NumStages));
+		currentSelectedMap = (currentSelectedMap + 1) % GetNumStages();
 		UpdateStageName();
 	}
 
 	public void PrevMap() {
-		currentSelectedMap = Mathf.Abs(currentSelectedMap - 1);
+		currentSelectedMap -= 1;
+		if (currentSelectedMap < 0) {
+			currentSelectedMap = GetNumStages() - 1;
+		}
 		UpdateStageName();
+	}
+
+	/// <summary>
+	/// Gets the number of stages that can be selected.
+	/// </summary>
+	/// <returns>the number of stages that can be selected.</returns>
+	private int GetNumStages() {
+		return arenaSelector ? ((int)Enums.BattleStages.NumStages) : ((int)Enums.TargetPracticeStages.NumStages);
 	}
 
 	/// <summary>
